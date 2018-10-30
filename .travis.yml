@@ -10,8 +10,8 @@ services:
   - postgresql
 
 before_script:
-  - psql -c "CREATE DATABASE api_tests;" -U admin
-  - psql -c "CREATE USER admin WITH PASSWORD 'admin123';" -U admin
+  - psql -c "CREATE DATABASE api_tests;" -U postgres
+  - psql -c "CREATE USER admin WITH PASSWORD 'admin123';" -U postgres
 
 # run pytest and coveralls script
 script:
