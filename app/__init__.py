@@ -1,5 +1,6 @@
 from flask import Flask
 from instance.config import app_config
+from manage import create_tables
 
 
 def create_app(config_name):
@@ -11,5 +12,10 @@ def create_app(config_name):
     :return: app
     """
     app = Flask(__name__, instance_relative_config=True)
+    create_tables()
     app.config.from_object(app_config[config_name])
+
+    from app.api import v2_blueprint
+    app.register_blueprint(v2_blueprint)
     return app
+

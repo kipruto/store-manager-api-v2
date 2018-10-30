@@ -6,6 +6,12 @@ python:
 install:
   - pip install -r requirements.txt
 # command to run tests
+services:
+  - postgresql
+
+before_script:
+  - psql -c "CREATE DATABASE api_tests;" -U postgres
+  - psql -c "CREATE USER admin WITH PASSWORD 'admin123';" -U admin
 
 # run pytest and coveralls script
 script:
