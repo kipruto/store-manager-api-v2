@@ -50,7 +50,7 @@ class User:
     def login(self, email_address, password):
         cursor = self.db.cursor()
         cursor.execute(
-            """SELECT email_address FROM users 
+            """SELECT is_admin, email_address FROM users 
                 WHERE email_address='{}' AND password='{}'""".format(email_address, password))
         data = cursor.fetchone()
         return data
