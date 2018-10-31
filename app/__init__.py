@@ -21,10 +21,19 @@ def create_app(config_name):
 
     @jwt.user_identity_loader
     def check_current_user(current_user):
+        """
+        This function returns the currently logged-in users attributes(email and is_admin)
+        :param current_user:
+        :return: current_user
+        """
         return current_user[1]
 
     @jwt.user_claims_loader
     def add_claims_to_access_token(current_user):
+        """
+        :param current_user:
+        :return: a dictionary containing logged in users is_admin attribute
+        """
         return {"role": current_user[0]}
 
     from app.api import v2_blueprint

@@ -1,6 +1,6 @@
 from flask import jsonify, make_response, request
 from flask_restful import Resource
-from flask_jwt_extended import (create_access_token, jwt_required, get_jwt_claims)
+from flask_jwt_extended import (create_access_token)
 from ..models.user_model import *
 
 
@@ -41,6 +41,9 @@ class Login(Resource):
         self.user = User()
 
     def post(self):
+        """
+        :return: login status, if login status is a success, issue the logged in user access tokens
+        """
         data = request.get_json()
         email_address = data['email_address']
         password = data['password']
@@ -54,5 +57,5 @@ class Login(Resource):
         return make_response(jsonify({
             "status": "OK",
             "message": "success",
-            "access_token": access_token
+            "access-token": access_token
         }), 201)
