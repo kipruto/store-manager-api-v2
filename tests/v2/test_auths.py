@@ -25,7 +25,7 @@ class TestDB(unittest.TestCase):
         # response_data = json.load(response.data)
         self.assertEqual(response.status_code, 201)
 
-    def test_user_login(self):
+    def test_user_slogin(self):
         response = self.client.post(
             'api/v2/auth/login', data=json.dumps(dict(
                 email_address="admin@admin.com", password="admin123")
