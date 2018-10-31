@@ -39,7 +39,7 @@ def tables():
                     on update cascade on delete cascade);"""
 
     users = """create table if not exists users(user_id serial primary key not null, 
-                    is_admin boolean not null,
+                    is_admin boolean default false,
                     first_name varchar(50) not null,
                     last_name varchar(50) not null,
                     email_address varchar(50) not null,
