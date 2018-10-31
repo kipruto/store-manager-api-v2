@@ -46,3 +46,11 @@ class User:
     @staticmethod
     def verify_hash(password, hashed_password):
         return sha256.verify(password, hashed_password)
+
+    def login(self, email_address, password):
+        cursor = self.db.cursor()
+        cursor.execute(
+            """SELECT email_address FROM users 
+                WHERE email_address='{}' AND password='{}'""".format(email_address, password))
+        data = cursor.fetchone()
+        return data
