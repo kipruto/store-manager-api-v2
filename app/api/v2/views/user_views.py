@@ -54,8 +54,8 @@ class Login(Resource):
                 "status": "Fail",
             }), 400)
         access_token = create_access_token(identity=current_user)
-        return make_response(jsonify({
+        return jsonify({
             "status": "OK",
             "message": "success",
             "access-token": access_token
-        }), 201)
+        })
