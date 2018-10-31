@@ -13,7 +13,7 @@ class TestDB(unittest.TestCase):
     def teardown(self):
         self.app_context.pop()
 
-    def test_create_user(self):
+    def test_user_signup(self):
         response = self.client.post(
             '/api/v2/auth/signup',
             data=json.dumps(dict(
@@ -24,3 +24,12 @@ class TestDB(unittest.TestCase):
         )
         # response_data = json.load(response.data)
         self.assertEqual(response.status_code, 201)
+
+    def test_user_login(self):
+        response = self.client.post(
+            'api/v2/auth/login', data=json.dumps(dict(
+                email_address="admin@admin.com", password="admin123")
+            ),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, 200)
