@@ -34,3 +34,19 @@ class SignUp(Resource):
             "user": result
         }), 201)
 
+
+class Login(Resource):
+    def __init__(self):
+        self.user = User()
+
+    def post(self):
+        data = request.get_json()
+        email_address = data['email_address']
+        password = data['password']
+
+        user_login = self.user.login(email_address=email_address, password=password)
+        if user_login is None:
+            return make_response(jsonify({
+                "status": "Fail",
+            }), 400)
+        return jsonify(message="Login successful!")
