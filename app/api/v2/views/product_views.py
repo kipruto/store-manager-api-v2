@@ -49,6 +49,8 @@ class UpdateProduct(Resource):
             "status": "OK",
             "message": "update successful"
         }), 201)
+
+
 class GetSpecificProduct(Resource):
     def __init__(self):
         self.product = Product()
@@ -59,5 +61,17 @@ class GetSpecificProduct(Resource):
             "status": "OK",
             "message": "success",
             "product": product
+        }), 200)
+
+
+class DeleteProduct(Resource):
+    def __init__(self):
+        self.product = Product()
+
+    def delete(self, product_id):
+        self.product.delete_product(product_id)
+        return make_response(jsonify({
+            "status": "OK",
+            "message": "delete successful"
         }), 200)
 
