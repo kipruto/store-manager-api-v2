@@ -15,7 +15,8 @@ class TestProduct(unittest.TestCase):
             category_id=1,
             product_name='cappuccino coffee',
             unit_price=200,
-            inventory_level=1000
+            inventory_level=1000,
+            minimum_inventory_level=50
         ))
 
     def teardown(self):
