@@ -76,11 +76,12 @@ class TestProduct(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_product_update(self):
-        response = self.client.put('/api/v2/products/1',
+        response = self.client.put('/api/v2/products/update/1',
                                    data=self.product_update_data,
                                    content_type='application/json')
         result = json.loads(response.data.decode())
         self.assertEqual(result['message'], 'update successful')
+
     def test_get_specific_product(self):
         response1 = self.client.post('/api/v2/categories',
                                      data=self.category_data,
