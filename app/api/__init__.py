@@ -3,6 +3,7 @@ from flask_restful import Api
 
 from .v2.views.user_views import SignUp, Login
 from .v2.views.category_views import ProductCategories, GetSpecificCategory
+from .v2.views.product_views import Products
 
 
 # create blueprint
@@ -13,3 +14,4 @@ api_v2.add_resource(SignUp, '/auth/signup')
 api_v2.add_resource(Login, '/auth/login')
 api_v2.add_resource(ProductCategories, '/categories')
 api_v2.add_resource(GetSpecificCategory, '/categories/<int:category_id>')
+api_v2.add_resource(Products, '/products')
