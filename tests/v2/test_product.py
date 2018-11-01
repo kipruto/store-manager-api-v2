@@ -54,7 +54,7 @@ class TestProduct(unittest.TestCase):
         response1 = self.client.post('/api/v2/categories',
                                      data=self.category_data,
                                      content_type='application/json'
-                                    )
+                                     )
         response_datum = json.loads(response1.data.decode())
         self.assertEqual(response_datum['message'], "success")
         resp = self.client.post('/api/v2/products',
