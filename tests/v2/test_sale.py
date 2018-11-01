@@ -42,8 +42,7 @@ class TestSale(unittest.TestCase):
             user_id=1,
             product_id=3,
             quantity=5,
-            unit_price=10,
-            total_cost=25
+            unit_price=10
         ))
 
         self.product_data = json.dumps(dict(

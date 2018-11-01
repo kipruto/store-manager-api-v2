@@ -13,11 +13,11 @@ class Sales(Resource):
         product_id = data['product_id']
         quantity = data['quantity']
         unit_price = data['unit_price']
-        total_cost = data['total_cost']
+        total_cost = int(data['quantity']) * int(data['unit_price'])
 
-        sale = self.sale.create_sale(user_id, product_id, quantity, unit_price, total_cost)
+        sale = self.sale.create_sale(user_id, product_id, quantity, unit_price)
         return make_response(jsonify({
-            "status": "OK",
             "message": "success",
-            "sale": sale
+            "sale": sale,
+            "total_cost": total_cost
         }), 201)
