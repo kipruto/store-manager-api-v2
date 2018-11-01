@@ -22,3 +22,11 @@ class Products(Resource):
             "message": "success",
             "data": result
         }), 201)
+
+    def get(self):
+        products = self.product.get_all_products()
+        return make_response(jsonify({
+            "status": "OK",
+            "message": "success",
+            "products": products
+        }), 200)
