@@ -34,7 +34,6 @@ def tables():
                     product_id int not null, 
                     quantity int not null,
                     unit_price money not null,
-                    total_cost money not null, 
                     date_created timestamp with time zone default('now'::text)::date not null,
                     foreign key(user_id) references users(user_id) on update cascade on delete cascade, 
                     foreign key(product_id) references products(product_id) 
