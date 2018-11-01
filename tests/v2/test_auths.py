@@ -40,6 +40,4 @@ class TestDB(unittest.TestCase):
                                     data=self.user_login_data,
                                     content_type='application/json'
                                     )
-        response_data = json.loads(response.data.decode())
-        self.assertTrue(response_data['access-token'])
         self.assertEqual(response.status_code, 200)
