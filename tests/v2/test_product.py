@@ -67,3 +67,21 @@ class TestProduct(unittest.TestCase):
 
         response = self.client.get('/api/v2/products', content_type='application/json')
         self.assertEqual(response.status_code, 200)
+
+    def test_get_specific_product(self):
+        response1 = self.client.post('/api/v2/categories',
+                                     data=self.category_data,
+                                     content_type='application/json'
+                                    )
+        response_datum = json.loads(response1.data.decode())
+        self.assertEqual(response_datum['message'], "success")
+        resp = self.client.post('/api/v2/products',
+                                data=self.product_data,
+                                content_type='application/json'
+                                )
+        response_data = json.loads(resp.data.decode())
+        self.assertEqual(response_data['message'], "success")
+        self.assertEqual(resp.status_code, 201)
+
+        response = self.client.get('/api/v2/products/1', content_type='application/json')
+        self.assertEqual(response.status_code, 200)

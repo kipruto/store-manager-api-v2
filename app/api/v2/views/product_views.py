@@ -30,3 +30,17 @@ class Products(Resource):
             "message": "success",
             "products": products
         }), 200)
+
+
+class GetSpecificProduct(Resource):
+    def __init__(self):
+        self.product = Product()
+
+    def get(self, product_id):
+        product = self.product.get_specific_product(product_id)
+        return make_response(jsonify({
+            "status": "OK",
+            "message": "success",
+            "product": product
+        }), 200)
+
