@@ -49,3 +49,9 @@ class TestProduct(unittest.TestCase):
         response_data = json.loads(resp.data.decode())
         self.assertEqual(response_data['message'], "success")
         self.assertEqual(resp.status_code, 201)
+
+    def test_get_all_products(self):
+        response = self.client.post('/api/v2/products')
+        res = json.loads(response.data.decode())
+        self.assertEqual(res['message'], 'success')
+        self.assertEqual(response.status_code, 200)
