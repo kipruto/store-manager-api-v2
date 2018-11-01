@@ -41,6 +41,5 @@ class TestDB(unittest.TestCase):
                                     content_type='application/json'
                                     )
         response_data = json.loads(response.data.decode())
-        self.assertEqual(response_data['message'], "success")
         self.assertTrue(response_data['access-token'])
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
