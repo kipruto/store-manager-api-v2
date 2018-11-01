@@ -40,9 +40,9 @@ class TestSale(unittest.TestCase):
         ))
         self.sale_data = json.dumps(dict(
             user_id=1,
-            product_id=1,
+            product_id=3,
             quantity=5,
-            unit_cost=5,
+            unit_price=10,
             total_cost=25
         ))
 
@@ -69,7 +69,7 @@ class TestSale(unittest.TestCase):
                                  content_type='application/json'
                                  )
         user_login_data = json.loads(login.data.decode())
-        self.assertEqual(user_login_data.status_code, 201)
+        self.assertEqual(user_login_data['message'], "success")
 
         # create product_category
         response = self.client.post('/api/v2/categories',
@@ -88,7 +88,7 @@ class TestSale(unittest.TestCase):
         self.assertEqual(resp.status_code, 201)
 
         # make sale
-        sale = self.client.post('/api/v2/sale',
+        sale = self.client.post('/api/v2/sales',
                                 data=self.sale_data,
                                 content_type='application/json'
                                 )
