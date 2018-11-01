@@ -57,7 +57,8 @@ def tables():
                     category_id int not null,
                     product_name varchar(50) not null, 
                     unit_price money not null, 
-                    inventory_levels int not null,
+                    inventory_level int not null,
+                    minimum_inventory_level int not null,
                     date_created timestamp with time zone default('now'::text)::date not null,
                     foreign key(category_id) references categories(category_id) on update cascade on delete cascade
                     );"""
