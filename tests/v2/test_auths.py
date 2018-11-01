@@ -36,8 +36,17 @@ class TestDB(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
 
     def test_user_login(self):
-        response = self.client.post('/api/v2/auth/login',
-                                    data=self.user_login_data,
+        response = self.client.post('/api/v2/auth/signup',
+                                    data=self.user_signup_data,
                                     content_type='application/json'
                                     )
-        self.assertEqual(response.status_code, 200)
+        response_data = json.loads(response.data.decode())
+        self.assertEqual(response_data['message'], "success")
+        resp = self.client.post('/api/v2/auth/login',
+                                data=self.user_login_data,
+                                content_type='application/json'
+                                )
+        response_data = json.loads(resp.data.decode())
+        self.assertEqual(response_data['message'], "success")
+        self.assertTrue(response_data['access-token'])
+        self.assertEqual(response.status_code, 201)
