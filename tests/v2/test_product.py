@@ -11,6 +11,10 @@ class TestProduct(unittest.TestCase):
         self.app_context.push()
         self.client = self.app.test_client(use_cookies=True)
 
+        self.category_data = self.product_data = json.dumps(dict(
+            category_title='beverages'
+        ))
+
         self.product_data = json.dumps(dict(
             category_id=1,
             product_name='cappuccino coffee',
@@ -22,11 +26,26 @@ class TestProduct(unittest.TestCase):
     def teardown(self):
         self.app_context.pop()
 
-    def test_create_product(self):
-        response = self.client.post('/api/v2/products',
-                                    data=self.product_data,
+    def test_create_category(self):
+        response = self.client.post('/api/v2/categories',
+                                    data=self.category_data,
                                     content_type='application/json'
                                     )
         response_data = json.loads(response.data.decode())
         self.assertEqual(response_data['message'], "success")
         self.assertEqual(response.status_code, 201)
+
+    def test_create_product(self):
+        response = self.client.post('/api/v2/categories',
+                                    data=self.category_data,
+                                    content_type='application/json'
+                                    )
+        response_datum = json.loads(response.data.decode())
+        self.assertEqual(response_datum['message'], "success")
+        resp = self.client.post('/api/v2/products',
+                                data=self.product_data,
+                                content_type='application/json'
+                                )
+        response_data = json.loads(resp.data.decode())
+        self.assertEqual(response_data['message'], "success")
+        self.assertEqual(resp.status_code, 201)

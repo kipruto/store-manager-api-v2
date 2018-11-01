@@ -8,6 +8,17 @@ class ProductCategories(Resource):
     def __init__(self):
         self.categories = Category()
 
+    def post(self):
+        data = request.get_json()
+        category_title = data['category_title']
+
+        result = self.categories.create_product_category(category_title)
+        return make_response(jsonify({
+            "status": "OK",
+            "message": "success",
+            "category": result
+        }), 201)
+
     @jwt_required
     def get(self):
         claims = get_jwt_claims()
