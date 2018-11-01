@@ -2,9 +2,6 @@ import unittest
 from app import create_app
 import json
 
-# product tests
-
-
 class TestProduct(unittest.TestCase):
     def setUp(self):
         self.app = create_app('testing')
