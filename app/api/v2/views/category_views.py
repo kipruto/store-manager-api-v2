@@ -1,5 +1,5 @@
 from flask import jsonify, make_response, request
-from flask_jwt_extended import (create_access_token, get_jwt_claims, jwt_required)
+from flask_jwt_extended import (get_jwt_claims, jwt_required)
 from flask_restful import Resource
 from ..models.category_model import *
 

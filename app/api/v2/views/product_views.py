@@ -30,3 +30,22 @@ class Products(Resource):
             "message": "success",
             "products": products
         }), 200)
+
+
+class UpdateProduct(Resource):
+    def __init__(self):
+        self.product = Product()
+
+    def put(self, product_id):
+        data = request.get_json()
+        category_id = data['category_id']
+        product_name = data['product_name']
+        unit_price = data['unit_price']
+        inventory_level = data['inventory_level']
+        minimum_inventory_level = data['minimum_inventory_level']
+        self.product.update_product(category_id, product_name, unit_price, inventory_level,
+                                    minimum_inventory_level, product_id)
+        return make_response(jsonify({
+            "status": "OK",
+            "message": "update successful"
+        }), 201)
