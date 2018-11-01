@@ -18,7 +18,7 @@ class TestingConfig(Config):
     """Configurations for Testing"""
     TESTING = True
     DEBUG = True
-    # test database URl
+    # test database URl ..
     url = "dbname='api_tests' host='127.0.0.1' port='5432' user='admin' password='admin123'"
     os.environ['ENV'] = 'testing'
 
