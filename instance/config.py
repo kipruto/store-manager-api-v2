@@ -11,14 +11,14 @@ class DevelopmentConfig(Config):
     DEBUG = True
     # Development database connection url
     # url = "dbname='api' host='127.0.0.1' port='5432' user='admin' password='admin123'"
-    # os.environ['ENV'] = 'development'
+    os.environ['ENV'] = 'development'
 
 
 class TestingConfig(Config):
     """Configurations for Testing"""
     TESTING = True
     DEBUG = True
-    # test database URl ..
+    # test database URL ..
     url = "dbname='api_tests' host='127.0.0.1' port='5432' user='admin' password='admin123'"
     os.environ['ENV'] = 'testing'
 

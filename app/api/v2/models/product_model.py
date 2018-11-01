@@ -39,7 +39,29 @@ class Product:
             )
             rows.append(datum)
         return rows
+      
+    def update_product(self, category_id, product_name, unit_price, inventory_level, minimum_inventory_level, product_id):
+            cursor = self.db.cursor()
+            # try:
+            # query = """ UPDATE products SET category_id=%s, product_name=%s, unit_price=%s,
+            #                     inventory_level=%s,
+            #                     minimum_inventory_level=%s
+            #                      WHERE product_id=%s """, (category_id, product_name, unit_price,
+            #                                                inventory_level,
+            #                                                minimum_inventory_level, product_id)
+            cursor.execute("UPDATE products SET category_id=%s, product_name=%s,unit_price=%s, inventory_level=%s, minimum_inventory_level=%s WHERE product_id=%s", (category_id, product_name, unit_price,inventory_level,minimum_inventory_level, product_id))
 
+            # # qr = cursor.execute(query)
+            # print(qr)
+            # if qr:
+            #     print("passed")
+            # else:
+            #     print("failed")
+        # except Exception as error:
+        #     print(error)
+
+            return self.db.commit()
+        
     def get_specific_product(self, product_id):
         cursor = self.db.cursor()
         cursor.execute("""SELECT product_id, category_id, product_name, unit_price, 

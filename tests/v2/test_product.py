@@ -22,6 +22,13 @@ class TestProduct(unittest.TestCase):
             inventory_level=1000,
             minimum_inventory_level=50
         ))
+        self.product_update_data = json.dumps(dict(
+            category_id=1,
+            product_name='moccha coffee',
+            unit_price=100,
+            inventory_level=500,
+            minimum_inventory_level=45
+        ))
 
     def teardown(self):
         self.app_context.pop()
@@ -67,6 +74,13 @@ class TestProduct(unittest.TestCase):
 
         response = self.client.get('/api/v2/products', content_type='application/json')
         self.assertEqual(response.status_code, 200)
+
+    def test_product_update(self):
+        response = self.client.put('/api/v2/products/update/1',
+                                   data=self.product_update_data,
+                                   content_type='application/json')
+        result = json.loads(response.data.decode())
+        self.assertEqual(result['message'], 'update successful')
 
     def test_get_specific_product(self):
         response1 = self.client.post('/api/v2/categories',
