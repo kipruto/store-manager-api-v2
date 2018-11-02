@@ -139,3 +139,48 @@ class TestSale(unittest.TestCase):
 
         response = self.client.get('/api/v2/sales', content_type='application/json')
         self.assertEqual(response.status_code, 200)
+
+    def test_get_specific_attendant_sales(self):
+        # create user
+        signup = self.client.post('/api/v2/auth/signup',
+                                  data=self.user_signup_data,
+                                  content_type='application/json'
+                                  )
+        signup_data = json.loads(signup.data.decode())
+        self.assertEqual(signup_data['message'], "success")
+
+        # login user
+        login = self.client.post('/api/v2/auth/login',
+                                 data=self.user_login_data,
+                                 content_type='application/json'
+                                 )
+        user_login_data = json.loads(login.data.decode())
+        self.assertEqual(user_login_data['message'], "success")
+
+        # create product_category
+        response = self.client.post('/api/v2/categories',
+                                    data=self.category_data,
+                                    content_type='application/json'
+                                    )
+        response_datum = json.loads(response.data.decode())
+        self.assertEqual(response_datum['message'], "success")
+        # create product
+        resp = self.client.post('/api/v2/products',
+                                data=self.product_data,
+                                content_type='application/json'
+                                )
+        response_data = json.loads(resp.data.decode())
+        self.assertEqual(response_data['message'], "success")
+        self.assertEqual(resp.status_code, 201)
+
+        # make sale
+        sale = self.client.post('/api/v2/sales',
+                                data=self.sale_data,
+                                content_type='application/json'
+                                )
+        res_data = json.loads(sale.data.decode())
+        self.assertEqual(res_data['message'], "success")
+        self.assertEqual(response.status_code, 201)
+
+        sale = self.client.get('/api/v2/sales/1', content_type='application/json')
+        self.assertEqual(sale.status_code, 200)
