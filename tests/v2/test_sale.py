@@ -182,5 +182,5 @@ class TestSale(unittest.TestCase):
         self.assertEqual(res_data['message'], "success")
         self.assertEqual(response.status_code, 201)
 
-        response = self.client.get('/api/v2/sales/1', content_type='application/json')
-        self.assertEqual(response.status_code, 200)
+        sale = self.client.get('/api/v2/sales/1', content_type='application/json')
+        self.assertEqual(sale.status_code, 200)

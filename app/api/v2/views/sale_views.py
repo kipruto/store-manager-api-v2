@@ -29,3 +29,16 @@ class Sales(Resource):
             "message": "success",
             "products": sales
         }), 200)
+
+
+class FilterRecordsByAttendant(Resource):
+    def __init__(self):
+        self.sales = Sale()
+
+    def get(self, user_id):
+        sale_records = self.sales.filter_sales_records_by_attendant(user_id)
+        return make_response(jsonify({
+            "status": "OK",
+            "message": "success",
+            "product": sale_records
+        }), 200)
