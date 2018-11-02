@@ -1,6 +1,6 @@
 from flask import jsonify, make_response, request
 from flask_restful import Resource
-from ..models.product_model import *
+from ..utils import *
 
 
 class Products(Resource):
@@ -14,6 +14,9 @@ class Products(Resource):
         unit_price = data['unit_price']
         inventory_level = data['inventory_level']
         minimum_inventory_level = data['minimum_inventory_level']
+
+        new_product = ProductValidation(category_id, product_name, unit_price, inventory_level, minimum_inventory_level)
+        new_product.validate_product_data()
 
         result = self.product.add_product(category_id, product_name, unit_price, inventory_level,
                                           minimum_inventory_level)
