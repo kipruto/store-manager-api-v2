@@ -1,7 +1,7 @@
 from flask import jsonify, make_response, request
 from flask_restful import Resource
 from flask_jwt_extended import (create_access_token)
-from ..models.user_model import *
+from ..utils import *
 
 
 class SignUp(Resource):
@@ -24,6 +24,8 @@ class SignUp(Resource):
         email_address = data['email_address']
         password = data['password']
 
+        user_data = RegistrationValidation(is_admin, first_name, last_name, email_address, password)
+        user_data.validate_user_data()
         result = self.user.create_user(is_admin=is_admin,
                                        first_name=first_name,
                                        last_name=last_name,
@@ -47,7 +49,8 @@ class Login(Resource):
         data = request.get_json()
         email_address = data['email_address']
         password = data['password']
-
+        login = LoginValidation(email_address, password)
+        login.validate_login_data()
         current_user = self.user.login(email_address=email_address, password=password)
         if current_user is None:
             return make_response(jsonify({
