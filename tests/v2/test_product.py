@@ -15,16 +15,42 @@ class TestProduct(unittest.TestCase):
             category_title='beverages'
         ))
 
+        self.user_signup_data = json.dumps(dict(
+            is_admin="True",
+            first_name='jane',
+            last_name="doe",
+            email_address="admin@admin.com",
+            password="admin123"
+        ))
+        self.user_login_data = json.dumps(dict(
+            email_address="admin@admin.com",
+            password="admin123"
+        ))
+
+        self.user_data = json.dumps(dict(
+            is_admin='False',
+            first_name='',
+            last_name='',
+            email_address='',
+        ))
+        self.sale_data = json.dumps(dict(
+            user_id=1,
+            product_id=1,
+            quantity=5,
+            unit_cost=5,
+            total_cost=25
+        ))
+
         self.product_data = json.dumps(dict(
             category_id=1,
-            product_name='cappuccino coffee',
+            product_name='cappuccino',
             unit_price=200,
             inventory_level=1000,
             minimum_inventory_level=50
         ))
         self.product_update_data = json.dumps(dict(
             category_id=1,
-            product_name='moccha coffee',
+            product_name='Espresso',
             unit_price=100,
             inventory_level=500,
             minimum_inventory_level=45

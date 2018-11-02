@@ -31,11 +31,12 @@ def tables():
     sales = """create table if not exists sales(
                     sale_id serial primary key not null, 
                     user_id int not null, 
-                    transaction_id int not null, 
-                    total_cost money not null, 
+                    product_id int not null, 
+                    quantity int not null,
+                    unit_price money not null,
                     date_created timestamp with time zone default('now'::text)::date not null,
                     foreign key(user_id) references users(user_id) on update cascade on delete cascade, 
-                    foreign key(transaction_id) references transactions(transaction_id) 
+                    foreign key(product_id) references products(product_id) 
                     on update cascade on delete cascade);"""
 
     users = """create table if not exists users(user_id serial primary key not null, 
@@ -63,11 +64,19 @@ def tables():
                     foreign key(category_id) references categories(category_id) on update cascade on delete cascade
                     );"""
 
+    carts = """create table if not exists cart(
+                    cart serial primary key not null, 
+                    product_id int not null,
+                    quantity int not null,
+                    date_created timestamp with time zone default('now'::text)::date not null,
+                    foreign key(product_id) references products(product_id) on update cascade on delete cascade
+                    );"""
+
     transactions = """create table if not exists transactions(
                     transaction_id serial primary key not null, 
                     product_id int not null, 
                     quantity int not null, cost money not null,
                     date_created timestamp with time zone default('now'::text)::timestamp not null,
                     foreign key(product_id) references products(product_id) on update cascade on delete cascade);"""
-    queries = [categories, products, users, transactions, sales, ]
+    queries = [categories, products, carts, users, transactions, sales, ]
     return queries
