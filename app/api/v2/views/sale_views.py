@@ -21,3 +21,11 @@ class Sales(Resource):
             "sale": sale,
             "total_cost": total_cost
         }), 201)
+
+    def get(self):
+        sales = self.sale.get_all_sales()
+        return make_response(jsonify({
+            "status": "OK",
+            "message": "success",
+            "products": sales
+        }), 200)
